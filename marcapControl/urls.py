@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from cellphonesControl import RecepcionList, RecepcionCreate
+
 urlpatterns = [
     # path('admin/', admin.site.urls),
     url(r"^recepcion/listar$", RecepcionList.as_view(), name="solicitud_listar"),
+    url(r"^recepcion/nueva$", RecepcionCreate.as_view(), name="solicitud_crear"),
     
 ]

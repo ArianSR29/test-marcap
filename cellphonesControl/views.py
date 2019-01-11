@@ -1,21 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.core.urlresolves import reverse_lazy
 from django.views.generic import ListView, CreateView
 
-from apps.cellphonesControl.models import RecepcionMercancia, OrdenCompra
-from apps.cellphonesControl.forms import RecepcionForm, OrdenCompraForm
+from cellphonesControl.models import RecepcionMercancia, OrdenCompra
+from cellphonesControl.forms import RecepcionForm, OrdenCompraForm
 
 # Create your views here.
 
 def index_recepcion(request):
     return HttpResponse("Soy la página principal de las recepciones")
     
-class RecepcionListView(ListView):
+class RecepcionList(ListView):
     model = Recepcion
     template_name = "recepcion/recepcion_list.html"
 
 
-class RecepcionCreateView(CreateView):
+class RecepcionCreate(CreateView):
     model = Recepcion
     template_name = "recepcion/recepcion_form.html"
     form_class = RecepcionForm
@@ -39,4 +40,6 @@ class RecepcionCreateView(CreateView):
             solicitud = form.save(commit=False)
             solicitud.OrdenCompra = form2.save()
             solicitud.save()
-            return HttpResponseRedirect(self.get_success_url())
+            return HttpResponseRedirect(self.get_success_url())}
+        else:
+            return self.render_to_response(self.get_context_data(form = form, form2 = form2))
