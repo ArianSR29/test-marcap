@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>subinventario</td>
+            <td>nombre</td>
+            <td>modelo</td>
+            <td>imei</td>
+            <td>folio</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% if  object_list %}
+            {% for recepcion in  object_list %}
+                <tr>
+                    <td>{{ recepcion.subinventario }}</td>
+                    <td>{{ recepcion.nombre }}</td>
+                    <td>{{ recepcion.modelo }}</td>
+                    <td>{{ recepcion.imei }}</td>
+                    <td>{{ recepcion.folio }}</td>
+
+                    <td> <a href="#">Editar</a></td>
+                    <td> <a href="#">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+            {% else %}
+                <h1>No hay registros</h1>
+        {% endif %}
+    </tbody>
+</table>
